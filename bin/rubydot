@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+
+require 'docopt'
+require 'rubydot'
+require 'logger'
+
+SCRIPT = File.basename(__FILE__)
+
+# rubocop: disable LineLength
+DOC = <<DOCOPT
+RubyDot - Simple UML Generator
+
+Usage:
+  #{SCRIPT} [-v] [-o=OUTFILE] PATH
+  #{SCRIPT} --version
+
+Options:
+  -o OUTFILE, --output=OUTFILE    Output file
+  -h, --help                      Show this help
+  -v, --verbose                   Show verbose output
+  --version                       Show version
+DOCOPT
+
+# Application runner
+class App
+  def initialize(usage)
+    @opts = Docopt.docopt(usage)
+  end
+
+  def run
+    if @opts['--version']
+      puts Rubydot::VERSION
+    end
+  end
+
+  def self.main
+    App.new(DOC).run
+    return 0
+  rescue Docopt::Exit => e
+    puts e.message
+    return 1
+  rescue RuntimeError => e
+    puts e.message
+    return 1
+  end
+end
+
+trap 'INT' do
+  puts 'Interrupted...'
+  exit 1
+end
+
+exit App.main
