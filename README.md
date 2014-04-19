@@ -1,6 +1,9 @@
 Rubydot
 =======
 
+
+** Initial skeleton - not ready yet **
+
 A simple class diagram generator for Ruby
 
 Installation
@@ -21,7 +24,7 @@ Or install it yourself as:
 Usage
 -----
 
-    rubydot -h
+    $ rubydot -h
 
 Contributing
 ------------
