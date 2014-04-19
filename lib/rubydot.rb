@@ -1,8 +1,7 @@
 # coding: utf-8
-#
-require 'rubydot/version'
 
-# Rubydot...
 module Rubydot
-  # Your code goes here...
 end
+
+require 'rubydot/error'
+require 'rubydot/version'

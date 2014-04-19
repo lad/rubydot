@@ -1,8 +1,10 @@
-# Rubydot
+Rubydot
+=======
 
 A simple class diagram generator for Ruby
 
-## Installation
+Installation
+------------
 
 Add this line to your application's Gemfile:
 
@@ -16,11 +18,13 @@ Or install it yourself as:
 
     $ gem install rubydot
 
-## Usage
+Usage
+-----
 
 rubydot -h
 
-## Contributing
+Contributing
+------------
 
 1. Fork it ( http://github.com/lad/rubydot/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
