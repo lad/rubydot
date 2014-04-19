@@ -1,0 +1,20 @@
+digraph <%= name %> {
+  color = "#DEF0FF"
+
+  subgraph cluster_start {
+    <% modules.each_with_index do |mod, i| %>
+      subgraph cluster_<%=i%> {
+        label = "<%= mod.name %>"
+        labelfontsize = 30
+        style = filled;
+        pencolor=black
+        margin = 15
+
+        <% mod.classes.each do |cls| %>
+          <%= cls.name %> [label="{ <%= cls.name %> | }", shape=record]
+          <%= cls.parent ? "#{cls.parent.name} -> " : '' %> <%= cls.name %> [dir="back", arrowtail="empty"]
+        <% end %>
+      }
+    <% end %>
+  }
+}

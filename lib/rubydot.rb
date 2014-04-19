@@ -5,3 +5,4 @@ end
 
 require 'rubydot/error'
 require 'rubydot/version'
+require 'rubydot/generator'
