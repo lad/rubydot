@@ -9,16 +9,6 @@ A simple class diagram generator for Ruby
 Installation
 ------------
 
-Add this line to your application's Gemfile:
-
-    gem 'rubydot'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
     $ gem install rubydot
 
 Usage
