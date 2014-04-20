@@ -28,33 +28,41 @@ class App
     @opts = Docopt.docopt(usage)
     @path = @opts['PATH']
     @log_level = @opts['--verbose'] ? Logger::DEBUG : Logger::INFO
-    @output = @opts['--output'].nil? ? default_output : @opts['--output']
-    fail Errno::EEXIST, "#{@output}" if File.exists?(@output)
+    @output = @opts['--output']
   end
 
   def run
     if @opts['--version']
       puts Rubydot::VERSION
     else
-      Rubydot::Generator.new(@path).run(@output)
+      fail Errno::EEXIST, "#{output}" if File.exists?(output)
+      Rubydot::Generator.new(@path).run(output)
     end
   end
 
-  def default_output
-    "#{File.basename(@path).partition('.')[0]}.png"
+  def output
+    @output ||= "#{File.basename(@path).partition('.')[0]}.png"
   end
 
   def self.main
     App.new(DOC).run
     return 0
-  rescue Rubydot::Error, Docopt::Exit, Errno::EEXIST, RuntimeError => e
+  rescue Rubydot::Error, Docopt::Exit, Errno::EEXIST, Errno::ENOENT => e
     puts e.message
+    return 1
+  rescue StandardError => e
+    puts e.message
+    puts "\n"
+    puts e.backtrace
+    puts "\nAn unexpected error occurred. Please create a bug report at:"
+    puts '    https://github.com/lad/rubydot/issues'
+    puts 'and quote all of the above information.'
     return 1
   end
 end
 
 trap 'INT' do
-  puts 'Interrupted...'
+  puts "\nInterrupted..."
   exit 1
 end
 
