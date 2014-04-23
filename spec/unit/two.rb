@@ -1,6 +1,6 @@
 # one.rb
 
-module ModuleName
+module TwoModuleName
   CONST_1 = { k1: 'const-value-1',
               k2: 'const-value-2' }
   CONST_2 = 'application/x-www-form-urlencoded'
