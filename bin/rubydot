@@ -12,14 +12,15 @@ DOC = <<DOCOPT
 RubyDot - Simple UML Generator
 
 Usage:
-  #{SCRIPT} [-v] [-o=OUTFILE] PATH
+  #{SCRIPT} [-v] PATH [-o=OUTDIR] [-f=FORMAT]
   #{SCRIPT} --version
 
 Options:
-  -o OUTFILE, --output=OUTFILE    Output file
-  -h, --help                      Show this help
-  -v, --verbose                   Show verbose output
-  --version                       Show version
+  -o OUTDIR, --output=OUTDIR    Output directory (defaults to $PWD)
+  -f FORMAT, --format=FORMAT    Output format [default: dot]
+  -h, --help                    Show this help
+  -v, --verbose                 Show verbose output
+  --version                     Show version
 DOCOPT
 
 # Application runner

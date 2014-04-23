@@ -2,7 +2,7 @@ Rubydot
 =======
 
 
-** Initial skeleton - not ready yet **
+** Work In Progress - not ready yet **
 
 A simple class diagram generator for Ruby
 
