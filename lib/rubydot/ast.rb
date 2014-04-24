@@ -23,22 +23,17 @@ module Rubydot
     def _parse_all
       @paths.each do |path|
         sexp = self.class.parser.parse(File.read(path))
-        if sexp.node_type == :module
-          _add_module(sexp)
-        else
-          sexp.each_of_type(:module).each do |sexp_module|
-            _add_module(sexp_module)
+        mods = SexpUtil.find_all(sexp, :module)
+        mods.each do |mod|
+          name = SexpUtil.node_name(mod)
+          @modules[name] ||= []
+
+          SexpUtil.find_all(mod, :class).each do |cls|
+            @modules[name] << [SexpUtil.node_name(cls),
+                               SexpUtil.super_class(cls)]
           end
         end
       end
-    end
-
-    def _add_module(sexp)
-      name = sexp.rest.head
-      @modules[name] = {}
-      modules[name] ||= Sexp.new
-      # [2] skips the type and name of the Sexp
-      modules[name].add(sexp[2]) if sexp.size >= 3
     end
   end
 end

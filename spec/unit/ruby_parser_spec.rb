@@ -1,8 +1,11 @@
 # Encoding: UTF-8
 
 require 'rubydot'
+require 'spec_helper'
 
 # some tests to ensure the ruby parsers works as expected
+
+TEST_DIR = spec_test_dir(__FILE__)
 
 def find(node, type)
   if node.nil? || !node.is_a?(Sexp)
@@ -34,6 +37,10 @@ def find_all(node, type)
   acc
 end
 
+def node_name(node)
+  node.rest && node.rest.head
+end
+
 def super_class(node)
   node.rest && node.rest.rest && node.rest.rest.head && \
   node.rest.rest.head.rest && node.rest.rest.head.rest.head
@@ -43,8 +50,7 @@ describe 'The RubyParser class' do
   describe 'parses one.rb' do
     before :each do
       parser = RubyParser.new
-      @sexp = parser.parse(File.read(File.join(File.dirname(__FILE__),
-                                               'one.rb')))
+      @sexp = parser.parse(File.read(File.join(TEST_DIR, 'one.rb')))
     end
 
     it 'can find :module' do
@@ -75,8 +81,7 @@ describe 'The RubyParser class' do
   describe 'parses two.rb' do
     before :each do
       parser = RubyParser.new
-      @sexp = parser.parse(File.read(File.join(File.dirname(__FILE__),
-                                               'two.rb')))
+      @sexp = parser.parse(File.read(File.join(TEST_DIR, 'two.rb')))
     end
 
     it 'can find :module' do
@@ -86,7 +91,7 @@ describe 'The RubyParser class' do
 
     it 'can find module name' do
       mod = find(@sexp, :module)
-      expect(mod.rest.head).to eq(:TwoModuleName)
+      expect(node_name(mod)).to eq(:TwoModuleName)
     end
 
     it 'can find two classes' do
@@ -97,8 +102,8 @@ describe 'The RubyParser class' do
 
     it 'can find two classes with the correct name' do
       classes = find_all(@sexp, :class)
-      expect(classes[0].rest.head).to eq(:BaseClass)
-      expect(classes[1].rest.head).to eq(:SubClass)
+      expect(node_name(classes[0])).to eq(:BaseClass)
+      expect(node_name(classes[1])).to eq(:SubClass)
     end
 
     it 'can find the parent class of a sub-class' do
@@ -115,8 +120,7 @@ describe 'The RubyParser class' do
   describe 'parses moderate.rb' do
     before :each do
       parser = RubyParser.new
-      @sexp = parser.parse(File.read(File.join(File.dirname(__FILE__),
-                                               'moderate.rb')))
+      @sexp = parser.parse(File.read(File.join(TEST_DIR, 'moderate.rb')))
     end
 
 
