@@ -36,8 +36,8 @@ class App
     if @opts['--version']
       puts Rubydot::VERSION
     else
-      fail Errno::EEXIST, "#{output}" if File.exists?(output)
-      Rubydot::Generator.new(@path).run(output)
+      fail Errno::EEXIST, "#{output}" if File.exist?(output)
+      Rubydot::App.new(@path).generate(output)
     end
   end
 
