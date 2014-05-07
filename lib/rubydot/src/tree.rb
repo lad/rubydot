@@ -2,7 +2,7 @@
 
 require 'ruby_parser'
 
-module Rubydot
+module Rubydot::Src
   # This class can create a single tree of modules/class from multiple ruby
   # source files module definitions spanning multiple files are merged
   # together, as are classes that span multiple files.

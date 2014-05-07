@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 
 # Some utility functions for traversing a Sexp data structure
-class Rubydot::SexpUtil
+class Rubydot::Src::SexpUtil
   class << self
     def find(node, type)
       if node.nil? || !node.is_a?(Sexp)
