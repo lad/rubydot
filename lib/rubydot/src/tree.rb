@@ -3,10 +3,10 @@
 require 'ruby_parser'
 
 module Rubydot
-  # This class can create a single AST from multiple ruby source files
-  # module definitions spanning multiple files are merged together, as
-  # are classes that span multiple files.
-  class AST
+  # This class can create a single tree of modules/class from multiple ruby
+  # source files module definitions spanning multiple files are merged
+  # together, as are classes that span multiple files.
+  class Tree
     attr_reader :modules
 
     # a class instance variable for the parser - we only ever need one

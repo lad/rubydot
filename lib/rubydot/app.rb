@@ -8,8 +8,8 @@ module Rubydot
     end
 
     def generate(output_path)
-      # Get a single AST for all source files.
-      ast = Src::AST.new(@path)
+      # Get a single tree for all source files.
+      ast = Src::Tree.new(@path)
     end
   end
 end
