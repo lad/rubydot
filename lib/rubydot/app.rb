@@ -1,7 +1,5 @@
 # encoding: UTF-8
 
-require 'pry'
-
 module Rubydot
   # Generate a UML class diagram for the ruby source files in the given path
   class App
@@ -11,7 +9,7 @@ module Rubydot
 
     def generate(output_path)
       # Get a single AST for all source files.
-      ast = AST.new(@path)
+      ast = Src::AST.new(@path)
     end
   end
 end

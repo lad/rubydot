@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module DotFile
+module Rubydot::DotFile
 end
 
 require 'rubydot/dot_file/dot_template'
