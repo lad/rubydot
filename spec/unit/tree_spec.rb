@@ -3,13 +3,13 @@
 require 'rubydot'
 require 'spec_helper'
 
-TEST_DIR = spec_test_dir(__FILE__)
-MULTI_TEST_DIR = File.join(TEST_DIR, 'multi')
+test_dir = spec_test_dir(__FILE__)
+multi_test_dir = File.join(test_dir, 'multi')
 
 describe 'The Rubydot module' do
   describe 'with a single input file: one.rb' do
     before :each do
-      @tree = Rubydot::Src::Tree.new(File.join(TEST_DIR, 'one.rb'))
+      @tree = Rubydot::Src::Tree.new(File.join(test_dir, 'one.rb'))
     end
 
     it 'finds one module' do
@@ -19,7 +19,7 @@ describe 'The Rubydot module' do
 
   describe 'with several source files' do
     before :each do
-      @tree = Rubydot::Src::Tree.new(MULTI_TEST_DIR)
+      @tree = Rubydot::Src::Tree.new(multi_test_dir)
     end
 
     it 'finds the two modules' do

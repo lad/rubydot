@@ -5,7 +5,7 @@ require 'spec_helper'
 
 # some tests to ensure the ruby parsers works as expected
 
-TEST_DIR = spec_test_dir(__FILE__)
+test_dir = spec_test_dir(__FILE__)
 
 def find(node, type)
   if node.nil? || !node.is_a?(Sexp)
@@ -50,7 +50,7 @@ describe 'The RubyParser class' do
   describe 'parses one.rb' do
     before :each do
       parser = RubyParser.new
-      @sexp = parser.parse(File.read(File.join(TEST_DIR, 'one.rb')))
+      @sexp = parser.parse(File.read(File.join(test_dir, 'one.rb')))
     end
 
     it 'can find :module' do
@@ -81,7 +81,7 @@ describe 'The RubyParser class' do
   describe 'parses two.rb' do
     before :each do
       parser = RubyParser.new
-      @sexp = parser.parse(File.read(File.join(TEST_DIR, 'two.rb')))
+      @sexp = parser.parse(File.read(File.join(test_dir, 'two.rb')))
     end
 
     it 'can find :module' do
@@ -120,7 +120,7 @@ describe 'The RubyParser class' do
   describe 'parses moderate.rb' do
     before :each do
       parser = RubyParser.new
-      @sexp = parser.parse(File.read(File.join(TEST_DIR, 'moderate.rb')))
+      @sexp = parser.parse(File.read(File.join(test_dir, 'moderate.rb')))
     end
 
 
