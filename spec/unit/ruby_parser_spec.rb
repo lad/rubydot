@@ -4,8 +4,38 @@ require 'rubydot'
 require 'spec_helper'
 
 # some tests to ensure the ruby parsers works as expected
+ONE_RB = <<END
+module OneModuleName
+  class OneClassName
+  end
+end
+END
 
-test_dir = spec_test_dir(__FILE__)
+SUB_CLASS_RB = <<END
+module TwoModuleName
+  class BaseClass
+  end
+  class SubClass < BaseClass
+    BaseClass
+  end
+end
+END
+
+SUB_CLASSES_RB = <<END
+module TheModuleName
+  class BaseAPI
+  end
+
+  class PublicRestAPI < BaseAPI
+  end
+
+  class AuthRestAPI < BaseAPI
+  end
+
+  class OAuthRestAPI < AuthRestAPI
+  end
+end
+END
 
 def find(node, type)
   if node.nil? || !node.is_a?(Sexp)
@@ -47,10 +77,10 @@ def super_class(node)
 end
 
 describe 'The RubyParser class' do
-  describe 'parses one.rb' do
+  describe 'parses one class' do
     before :each do
       parser = RubyParser.new
-      @sexp = parser.parse(File.read(File.join(test_dir, 'one.rb')))
+      @sexp = parser.parse(ONE_RB)
     end
 
     it 'can find :module' do
@@ -78,10 +108,10 @@ describe 'The RubyParser class' do
     end
   end
 
-  describe 'parses two.rb' do
+  describe 'parses one sub-classes' do
     before :each do
       parser = RubyParser.new
-      @sexp = parser.parse(File.read(File.join(test_dir, 'two.rb')))
+      @sexp = parser.parse(SUB_CLASS_RB)
     end
 
     it 'can find :module' do
@@ -117,10 +147,10 @@ describe 'The RubyParser class' do
     end
   end
 
-  describe 'parses moderate.rb' do
+  describe 'parses several sub-classes' do
     before :each do
       parser = RubyParser.new
-      @sexp = parser.parse(File.read(File.join(test_dir, 'moderate.rb')))
+      @sexp = parser.parse(SUB_CLASSES_RB)
     end
 
 
